@@ -1,6 +1,6 @@
 package com.jonas.screenmusic.model;
 
-public enum tipoArtista {
+public enum TipoArtista {
 	SOLO,
 	DUPLA,
 	BANDA;

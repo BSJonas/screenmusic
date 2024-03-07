@@ -3,10 +3,12 @@ package com.jonas.screenmusic.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -22,9 +24,18 @@ public class Artista {
 	@Column(unique = true)
 	private String nome;
 	@Enumerated(EnumType.STRING)
-	private tipoArtista tipo;
-	@OneToMany(mappedBy = "artista")
+	private TipoArtista tipo;
+	@OneToMany (mappedBy = "artista", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<Musica> musicas = new ArrayList<>();
+
+	public Artista(){
+
+	}
+
+		public Artista(String nome, TipoArtista tipo) {
+		this.nome = nome;
+		this.tipo = tipo;
+	}
 
 	public Long getId() {
 		return id;
@@ -42,11 +53,11 @@ public class Artista {
 		this.nome = nome;
 	}
 
-	public tipoArtista getTipo() {
+	public TipoArtista getTipo() {
 		return tipo;
 	}
 
-	public void setTipo(tipoArtista tipo) {
+	public void setTipo(TipoArtista tipo) {
 		this.tipo = tipo;
 	}
 
